@@ -2,128 +2,102 @@
 
 ---
 
-# 8-Puzzle Solver using Iterative Deepening Search (IDS)
+# 8 Puzzle Solver using Iterative Deepening Search (IDS)
 
-## Overview
-This Python implementation solves the classic 8-puzzle problem using the Iterative Deepening Search (IDS) algorithm. The 8-puzzle is a sliding puzzle where the player must move tiles to arrange them in a specific goal configuration. The algorithm combines the benefits of Depth-First Search (DFS) and Breadth-First Search (BFS), allowing for an optimal solution while avoiding the high memory costs of BFS.
+This Python project solves the classic 8-puzzle problem using **Depth-First Search** (DFS) with **Iterative Deepening Search** (IDS). The goal of the 8-puzzle is to arrange the numbered tiles (1 to 8) in a 3x3 grid, with the empty tile represented as `0`. The puzzle can be solved by sliding the tiles around, and this implementation finds the shortest solution path.
 
-## Problem Description
-The 8-puzzle problem consists of a 3x3 grid with 8 numbered tiles (1-8) and one empty space (0). The goal is to arrange the tiles in the following order:
+## Problem Description:
 
-```
-1 2 3
-4 5 6
-7 8 0
-```
-
-A tile can be moved into the empty space in four directions: up, down, left, or right. The goal is to reach the target configuration in the fewest moves.
+In the 8-puzzle, you are given an initial state and a goal state of the puzzle. The objective is to move the tiles in such a way that the initial configuration transforms into the goal configuration in the fewest possible moves.
 
 ### Example:
-Start State:
+- **Initial State:**
+  ```
+  1 5 3
+  2 7 4
+  6 0 8
+  ```
+
+- **Goal State:**
+  ```
+  1 2 3
+  4 5 6
+  7 8 0
+  ```
+
+## Features:
+- **Depth-First Search (DFS) with Iterative Deepening (IDS)**: The search algorithm increases the depth limit progressively to explore all possible states.
+- **Solvability Check**: The program will automatically check if the puzzle is solvable and attempt to find a solution path if possible.
+- **User Input**: Users can enter their own initial puzzle state, and the program will solve it for them.
+
+## Installation:
+1. Clone the repository to your local machine:
+   ```bash
+   git clone https://github.com/Bushra-Butt-17/8-Puzzle-Solver-using-Iterative-Deepening-Search-IDS-.git
+   ```
+2. Navigate into the project directory:
+   ```bash
+   cd 8-Puzzle-Solver-using-Iterative-Deepening-Search-IDS-
+   ```
+
+3. Install any necessary Python dependencies (if applicable):
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   **Note:** This project doesn't have any external dependencies other than Python itself, so no further setup is required.
+
+## Usage:
+1. Run the script:
+   ```bash
+   python puzzle_solver.py
+   ```
+
+2. The program will prompt you to enter the initial state of the puzzle in the following format (3 rows with 3 numbers each):
+   ```
+   1 5 3
+   2 7 4
+   6 0 8
+   ```
+
+3. After entering the initial state, the program will attempt to solve the puzzle and display the solution path (if a solution is found).
+
+## Example Input:
 ```
+Enter the initial state of the puzzle (3x3 grid):
 1 5 3
 2 7 4
 6 0 8
 ```
 
-Goal State:
-```
-1 2 3
-4 5 6
-7 8 0
-```
-
-## Iterative Deepening Search (IDS)
-IDS is a hybrid of Depth-First Search (DFS) and Breadth-First Search (BFS). It performs multiple depth-limited searches with increasing depth limits until a solution is found.
-
-### Algorithm Steps:
-1. **Initialize the puzzle** with the start state and goal state.
-2. **Iterative Deepening**:
-   - Start from a depth limit of 0.
-   - Perform Depth-Limited Search (DLS) at each depth level.
-   - If the goal state is found within the current depth limit, return the solution.
-   - If the goal state is not found, increase the depth limit and repeat.
-3. **Terminate** if the maximum depth limit is exceeded or if the puzzle is unsolvable.
-
-### Depth-Limited Search (DLS) Algorithm:
-- Check if the current state matches the goal state.
-- If the depth limit is reached, return failure.
-- Generate all possible successor states by sliding tiles in the four possible directions.
-- Perform recursive DLS on each unvisited successor state.
-
-## Features:
-- Solves the 8-puzzle problem using IDS.
-- Handles both the start and goal state configurations.
-- Ensures the puzzle is solvable before attempting the solution.
-- Outputs the sequence of moves to reach the goal state.
-
-## Requirements
-- Python 3.x
-
-## Installation
-1. Clone the repository:
-   ```
-   git clone <repository_url>
-   ```
-2. Navigate to the project directory:
-   ```
-   cd 8-puzzle-ids
-   ```
-
-## Usage
-
-### Example:
-```python
-from puzzle_solver import solve_puzzle
-
-# Define the start state and goal state
-start_state = [
-    [1, 5, 3],
-    [2, 7, 4],
-    [6, 0, 8]
-]
-goal_state = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 0]
-]
-
-# Solve the puzzle using IDS
-solution = solve_puzzle(start_state, goal_state)
-
-if solution:
-    print("Solution found!")
-    for step in solution:
-        print(step)
-else:
-    print("No solution found. The puzzle may be unsolvable.")
-```
-
-### Parameters:
-- `start_state`: The initial configuration of the puzzle (3x3 grid).
-- `goal_state`: The target configuration of the puzzle (3x3 grid).
-
-### Output:
-- Prints the sequence of moves leading from the start state to the goal state.
-- If the puzzle is unsolvable, the program will notify the user.
-
 ## Example Output:
 ```
-Solution found!
-Move 1: [1, 5, 3] [2, 7, 4] [6, 0, 8]
-Move 2: [1, 5, 3] [2, 0, 4] [6, 7, 8]
-Move 3: [1, 0, 3] [2, 5, 4] [6, 7, 8]
+Solution found within the depth limit.
+
+Solution Path:
+1 5 3
+2 7 4
+6 0 8
+
+1 5 3
+2 0 4
+6 7 8
+
+1 0 3
+2 5 4
+6 7 8
+
 ...
+
+Total number of moves: 10
 ```
 
-## Solvability Check
-Before running the search, the program checks if the puzzle is solvable. An 8-puzzle is solvable if the number of inversions (pairs of tiles where a higher numbered tile precedes a lower numbered tile) is even.
+## Project Structure:
+- `puzzle_solver.py`: The main Python file that implements the 8-puzzle solver using IDS.
+- `README.md`: This README file with all the project details.
+- `requirements.txt`: (Optional) A list of Python dependencies.
 
-## Limitations
-- The algorithm may take a significant amount of time for more complex initial states with larger depth limits.
-- The implementation assumes that the puzzle is solvable; unsolvable puzzles will return a failure message.
-
-## License
-This project is licensed under the MIT License.
+## License:
+This project is open-source and available under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ---
