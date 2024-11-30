@@ -86,7 +86,7 @@ Solution Path:
 1 0 3
 2 5 4
 6 7 8
-
+ 
 ...
 
 Total number of moves: 10
